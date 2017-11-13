@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node seed.js",
-    "watch": "nodemon",
+    "seed": "node server/seed.js",
+    "watch": "nodemon client/index.js",
     "bundle": "browserify client/index.js -t babelify -o server/public/bundle.js",
     "bundle:watch": "watchify client/index.js -vd -t babelify -o server/public/bundle.js"
   },
