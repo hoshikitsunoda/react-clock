@@ -2,14 +2,26 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import styled from 'styled-components'
 
-class Clock extends Component {
+class Clock extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {time: new Date()}
+    this.state = {
+      timezones: [{ zone: 'Asia/Tokyo' }]
+    }
+  }
+
+  componentWillMount() {
+    fetch('/timezones')
+      .then(res => res.json())
+      .then(timezones => this.setState({ timezones }))
   }
 
   componentDidMount() {
-    setInterval(() => this.tick(), 1000)
+    this.timerID = setInterval(() => this.tick(), 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID)
   }
 
   tick() {
@@ -19,7 +31,14 @@ class Clock extends Component {
   }
 
   render() {
-    return <div>Current time is: {moment().tz(this.state.time.toLocaleTimeString()).format('hh:mm:ss a')}</div>
+    return (<div>
+     {this.state.timezones.map(({ zone }) => {
+       return <div className="times" key={zone}>
+       <div className="zone" key={zone.zone}>{zone.split('/')[1].replace('_', ' ')}</div>
+       <div className="time" key={zone.time}>{moment().tz(zone).format('hh:mm:ss a')}</div>
+       </div>
+     })}
+    </div>)
   }
 }
 
