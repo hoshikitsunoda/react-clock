@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node server/seed.js",
     "watch": "nodemon client/index.js",
-    "bundle": "browserify client/public/main.js -t babelify -o server/public/bundle.js",
-    "bundle:watch": "watchify client/public/main.js -vd -t babelify -o server/public/bundle.js"
+    "bundle": "browserify client/public/clock.js -t babelify -o server/public/bundle.js",
+    "bundle:watch": "watchify client/public/clock.js -vd -t babelify -o server/public/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "mongodb": "^2.2.33",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "styled-components": "^2.2.3",
     "watchify": "^3.9.0"
   },
   "devDependencies": {
